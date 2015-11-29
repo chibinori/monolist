@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   
   # itemをhaveする
   def have(item)
-    haves..create(item_id: item.id)
+    haves.create(item_id: item.id)
   end
 
   #itemのhaveを解除する。
