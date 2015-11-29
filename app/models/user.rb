@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
   def have?(item)
     have_items.include?(item)
   end
+  
+  #このユーザがHaveしているアイテムの中の指定されたASINのアイテムを返す.
+  def find_have_item_by_ASIN(asin)
+    have_items.find_by(asin: asin)
+  end
 
   #itemをwantする。
   def want(item)
@@ -63,5 +68,10 @@ class User < ActiveRecord::Base
   #itemをwantしている場合true、wantしていない場合falseを返す。
   def want?(item)
     want_items.include?(item)
+  end
+
+  #このユーザがWantしているアイテムの中の指定されたASINのアイテムを返す.
+  def find_want_item_by_ASIN(asin)
+    want_items.find_by(asin: asin)
   end
 end

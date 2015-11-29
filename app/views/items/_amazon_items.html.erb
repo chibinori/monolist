@@ -20,14 +20,37 @@
           </p>
         </div>
         <div class="action clearfix">
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
-                      :class => "want-#{item.get('ASIN')} btn-want btn btn-danger btn-sm want",
-                      :remote => true,
-                      :method => :post %>
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
-                      :class => "have-#{item.get('ASIN')} btn-have btn btn-warning btn-sm have",
-                      :remote => true,
-                      :method => :post %>
+          <% want_item = current_user.find_want_item_by_ASIN(item.get('ASIN')) %>
+          <% if want_item.blank? %>
+            <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
+                        :class => "want-#{item.get('ASIN')} btn-want btn btn-danger btn-sm want",
+                        :remote => true,
+                        :method => :post %>
+          <% else %>
+            <% #ここに入る時は検索したアイテムはitemsテーブルに存在する %>
+            <%= link_to "" , 
+                ownership_path(want_item , 
+                  item_id: want_item.id , type: "Want") ,
+                :class => "want-#{want_item.id} btn-want btn btn-danger btn-sm wanted",
+                :remote => true,
+                :method => :delete %>            
+          <% end %>
+          
+          <% have_item = current_user.find_have_item_by_ASIN(item.get('ASIN')) %>
+          <% if have_item.blank? %>
+            <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
+                        :class => "have-#{item.get('ASIN')} btn-have btn btn-warning btn-sm have",
+                        :remote => true,
+                        :method => :post %>
+          <% else %>
+            <% #ここに入る時は検索したアイテムはitemsテーブルに存在する %>
+            <%= link_to "" , 
+              ownership_path( have_item , 
+                item_id: have_item.id , type: "Have") ,
+              :class => "have-#{have_item.id} btn-have btn btn-warning btn-sm haved",
+              :remote => true,
+              :method => :delete %>
+          <% end %>
         </div>
       </div>
     <% end %>
