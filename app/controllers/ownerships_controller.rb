@@ -39,6 +39,9 @@ class OwnershipsController < ApplicationController
       current_user.want(@item) if !current_user.want?(@item)
     end
 
+    if params[:showed_user_id].present?
+      @showed_uesr = User.find(params[:showed_user_id])
+    end
   end
 
   def destroy
@@ -53,5 +56,8 @@ class OwnershipsController < ApplicationController
       current_user.unwant(@item) if current_user.want?(@item)
     end
 
+    if params[:showed_user_id].present?
+      @showed_uesr = User.find(params[:showed_user_id])
+    end
   end
 end

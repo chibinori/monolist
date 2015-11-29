@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to @user, notice: "会員登録が完了しました"
     else
       render 'new'
@@ -16,6 +17,8 @@ class UsersController < ApplicationController
   
   def show
     @items = @user.items.group('items.id')
+    # プロフィール画面でWantとHaveの数をAjaxで書き換えるために使用
+    @showed_uesr = @user
   end
 
   private

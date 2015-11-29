@@ -4,19 +4,15 @@
       <div class="item-box">
         <div class="image">
           <div class="img-wrap">
-            <% #TODO 商品画像 %>
+            <% # 商品画像 %>
             <% image_url = item.get('LargeImage/URL')  || "no-image.png" %>
             <%= image_tag(image_url , alt: item.get('ItemAttributes/Title')) %>
-            <%# 元のコード %>
-            <%#= image_tag("no-image.png" , alt: item.get('ItemAttributes/Title')) %>
           </div>
         </div>
         <div class="detail">
           <p class="title">
             <%# 商品タイトル %>
             <%= item.get('ItemAttributes/Title') || "タイトルは存在しません" %>
-            <%# 元のコード %>
-            <%# 仮タイトル %>
           </p>
         </div>
         <div class="action clearfix">

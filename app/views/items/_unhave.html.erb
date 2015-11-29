@@ -1,6 +1,10 @@
+<% showed_user_id = "" %>
+<% if @showed_uesr.present? %>
+  <% showed_user_id = @showed_uesr.id %>
+<% end %>
 <%= link_to "" , 
   ownership_path( current_user.haves.find_by(:item_id => item.id) , 
-    item_id: item.id , type: "Have") ,
+    item_id: item.id , type: "Have", showed_user_id: showed_user_id) ,
   :class => "have-#{item.id} btn-have btn btn-warning btn-sm haved",
   :remote => true,
   :method => :delete %> 

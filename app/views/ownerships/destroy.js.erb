@@ -1,7 +1,13 @@
 <% if params[:type] == "Have" %>
   $(".have-<%= @item.id %>").replaceWith("<%= escape_javascript(render('items/have' , item: @item)) %>");
+  <% if @showed_uesr == current_user %>
+    $("#have_count").html('<%= current_user.have_items.count %>');
+  <% end %>
 <% else %>
   $(".want-<%= @item.id %>").replaceWith("<%= escape_javascript(render('items/want' , item: @item)) %>");
+  <% if @showed_uesr == current_user %>
+    $("#want_count").html('<%= current_user.want_items.count %>');
+  <% end %>
 <% end %>
 
 $('.btn-have,.btn-want').removeAttr('disabled');
