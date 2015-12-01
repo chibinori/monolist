@@ -2,6 +2,22 @@
   <title>want ranking - monolist</title>
   <meta name="description" content="多くの人が欲しいモノをランキング表示しています。">
 <% end %>
-
-
-<h1>wantランキング</h1>
+<div class="ranking">
+  <h1>欲しいモノ ランキング</h1>
+  <% if !@ranker_item_and_counts.any? %>
+    <h2>まだ欲しいモノは存在しません</h2>
+  <% else %>
+    <div class="table-responsive list">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>モノの名前</th>
+            <th>欲しがっている人数</th>
+          </tr>
+        </thead>
+        <%= render 'ranking_list' %>
+      </table>
+    </div>
+  <% end %>
+</div>

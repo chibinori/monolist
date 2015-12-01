@@ -2,14 +2,22 @@
   <title>have ranking - monolist</title>
   <meta name="description" content="多くの人が持ってるモノをランキング表示しています。">
 <% end %>
-
-
-<h1>haveランキング</h1>
-
-<% @rankers.each.with_index(1)  do |(item_id, num), i | %>
-
-  rank:<%= i %>
-  item_id:<%= item_id %>
-  num:<%= num %>
-
-<% end %>
+<div class="ranking">
+  <h1>持っているモノ ランキング</h1>
+  <% if !@ranker_item_and_counts.any? %>
+    <h2>まだ誰も何も持っていません</h2>
+  <% else %>
+    <div class="table-responsive list">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>モノの名前</th>
+            <th>持っている人数</th>
+          </tr>
+        </thead>
+        <%= render 'ranking_list' %>
+      </table>
+    </div>
+  <% end %>
+</div>

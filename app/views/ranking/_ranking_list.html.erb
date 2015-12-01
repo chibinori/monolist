@@ -1,0 +1,28 @@
+<tbody>
+  <%# ループ処理の中で表示するランキング順位 %>
+  <% current_rank = 0 %>
+  <%# @ranker_item_and_countsは１つ目がItemインスタンス、２つ目がその合計カウントの配列%>
+  <%# トップアイテムの人数 + 1の値を初期値にすることで、
+      ループの最初のcurrent_rankが1になる %>
+  <% current_count = @ranker_item_and_counts[0][1] + 1 %>
+  <% @ranker_item_and_counts.each.with_index(1) do | ranker_item_and_count, index | %>
+    <%# 同数の場合はランクをインクリメントしない%>
+    <% if current_count > ranker_item_and_count[1] %>
+      <% current_count = ranker_item_and_count[1] %>
+      <% current_rank = index %>
+    <% end %>
+
+    <% if current_rank == 1 %>
+      <tr class="top_item">
+    <% else %>
+      <tr>
+    <% end %>
+        <th scope="row"><%= current_rank %></th>
+        <td>
+          <%= link_to ranker_item_and_count[0].title,
+            ranker_item_and_count[0] %>
+        </td>
+        <td><%= ranker_item_and_count[1] %></td>
+      </tr>
+  <% end %>
+</tbody>
